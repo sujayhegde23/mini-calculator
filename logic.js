@@ -25,7 +25,7 @@ buttons.forEach((button)=>{
         if(button.textContent == '='){
             if(input != ""){
                 let result = computeResult(input);
-                if(!isNaN(result)){
+                if(!isNaN(result) && result != 0){
                     input =result;
                 }else{
                     input =""; 
@@ -40,10 +40,7 @@ buttons.forEach((button)=>{
                 input += button.textContent;
                 displayContent(input);
                 console.log(input);
-            }
-          
+            } 
         }
-        
-        
     })
 })
