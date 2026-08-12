@@ -1,72 +1,49 @@
-const buttons = document.querySelectorAll('.btn')
+let input = "";
+let buttons = document.querySelectorAll('.btn');
+let display = document.querySelector('.display-result');
 
-
-console.log(buttons[0].innerText);
-
-let arr =[];
-let number = 0;
-let operator = null;
-
-function add(){
-    let sum = arr[0]+arr[1];
-    return sum;
+function clearDisplay(){
+    input ="";
+    display.value = 0;
 }
-function difference(){
-    return arr[0] - arr[1];
-}
-function multiply(){
-    return arr[0]*arr[1];
-}
-function divide(){
-    return arr[0]/arr[1];
-}
-function calculateResult(){
-    if(operator === '+'){
-        return add();
-    }
-    else if(operator === '-'){
-        return difference()
-    }
-    else if(operator === 'x'){
-        return multiply();
-    }
-    else{
-        return divide();
-    }
-}
-function buildNumber(button){
-    const val = button.textContent;
 
-    
-    if(!isNaN(+val)){
-         number = number*10 + Number(val);
-    }
-    else{
-        if(val == 'C'){
+function computeResult(input){
+    try{
+        return eval(input);
+    }catch{
+        return "Invalid Expression";
+    } 
+}
 
-        }else{
-            if(!operator){
-                operator = val
-            }
-            console.log(operator);
-            arr.push(number);
-            number=0;
-            console.log(arr);
-            if(val === '='){
-                console.log(calculateResult()); 
-                arr=[];
-                operator=null;
+function displayContent(content){
+    display.value =`${content}`
+}
+
+buttons.forEach((button)=>{
+    button.addEventListener('click' ,()=>{
+        
+        if(button.textContent == '='){
+            if(input != ""){
+                let result = computeResult(input);
+                if(!isNaN(result)){
+                    input =result;
+                }else{
+                    input =""; 
+                }
+            displayContent(result);
             }
         }
+        else{
+            if(button.textContent == 'C'){
+                clearDisplay();
+            }else{
+                input += button.textContent;
+                displayContent(input);
+                console.log(input);
+            }
+          
+        }
         
-    }
-    console.log(number);
-   
-    
-    
-}
-buttons.forEach((button)=>{
-    button.addEventListener('click' , ()=>{
-        buildNumber(button)
+        
     })
 })
