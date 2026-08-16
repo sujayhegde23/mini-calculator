@@ -61,3 +61,11 @@ body{
 }
 
 
+.btn:hover{
+    background-color: rgb(50, 47, 47);
+}
+
+.clear:hover{
+    background-color: rgb(222, 23, 23);
+    color:black
+}
